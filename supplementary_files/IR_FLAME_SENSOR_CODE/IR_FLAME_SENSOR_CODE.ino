@@ -1,8 +1,8 @@
 // IR Flame Sensor Module
 //pin definitions
 int flame0= A0; 
-int flame1= A1; 
-int flame2= A2; 
+int flame1= A5; 
+int flame2= A4; 
 int flame3= A3; 
 
 void setup() {
@@ -22,7 +22,6 @@ void loop() {
   Serial.println(flaVal1);
   Serial.println(flaVal2);
   Serial.println(flaVal3);
-  delay(200);
   
   
   int threshold = 35;
@@ -46,4 +45,5 @@ void loop() {
   }else{
     Serial.println("No Flame3");
   }
+  delay(2000);
 }
