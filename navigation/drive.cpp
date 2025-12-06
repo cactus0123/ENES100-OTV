@@ -39,15 +39,15 @@ void moveBackward(int spd) {
 }
 
 void moveRight(int spd) {
-  motorMove(0, false, spd);
-  motorMove(1, true, spd);
+  motorMove(0, true, spd);
+  motorMove(1, false, spd);
   motorMove(2, true, spd);
   motorMove(3, false, spd);
 }
 
 void moveLeft(int spd) {
-  motorMove(0, true, spd);
-  motorMove(1, false, spd);
+  motorMove(0, false, spd);
+  motorMove(1, true, spd);
   motorMove(2, false, spd);
   motorMove(3, true, spd);
 }
@@ -60,9 +60,9 @@ void rotateCW(int spd) {
 }
 
 void rotateCCW(int spd) {
-  motorMove(0, false, spd);
-  motorMove(1, true, spd);
-  motorMove(2, false, spd);
-  motorMove(3, true, spd);
+  motorMove(0, false, spd);  // backward
+  motorMove(1, true, spd);   // forward
+  motorMove(2, true, spd);   // backward
+  motorMove(3, false, spd);  // forward
 }
 

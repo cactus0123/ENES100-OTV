@@ -4,29 +4,51 @@
  */
 
 // Include all module headers
-//#include "drive.h"
+#include "drive.h"
 //#include "flame_sensor.h"
-//#include "comm.h"
-#include "Enes100.h"
+#include "comm.h"
 
 void setup() {
   Serial.begin(9600);
   delay(100);  // Give Serial time to initialize
   Serial.println("=== Initializing Robot Systems ===");
-  
-  // Initialize all modules
-  //initMotors();
-  //initFlameSensors();
-  //initStepperMotor();
-  //initUltrasonicSensor();
-  //initComm();
-  delay(1000);
-  Enes100.begin("Smokey", FIRE, 566, 1120, 50, 53);
-  delay(1000);
-  Serial.println(Enes100.isConnected() ? "connected" : "not connected");
-
-  
+  initMotors();
+  // initFlameSensors();
+  // initStepperMotor();
+  // initUltrasonicSensor();
+  initComm();
   Serial.println("=== Initialization Complete ===");
+
+  if (getY() > 0) {
+    if (getY() < 1) {
+      //180 degree turn
+      if (getTheta() < -2.9 || getTheta() > 2.9) {
+        rotateCCW(255);
+        delay(9000);
+        stopAll();
+      }
+      // OTV facing forwards
+      else if (getTheta() < -1.4 || getTheta() > -1.6) {
+        rotateCCW(255);
+        delay(4500);
+        stopAll();
+      }
+
+      // moveForward(255);
+      // delay(5000);
+      // stopAll();
+    }
+  }
+
+  identifyTopography();
+  // rotateCCW(255);
+  // delay(2500); // rotate 90 degrees timing
+  // stopAll();
+  // delay(1250);
+  // moveForward(255);
+  // delay(10000);
+  // stopAll();
+  // delay(1250);
 }
 
 void loop() {

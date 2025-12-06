@@ -1,13 +1,12 @@
-/*
 #include "comm.h"
-#include <Enes100.h>
 #include <stdlib.h>
+#include <Enes100.h>
 
 // Configuration
-const int TX = 52;   // NOTE: Conflicts with stepper motor pin 9
-const int RX = 53;  // NOTE: Conflicts with motor pin 10
+const int TX = 62;   // NOTE: Conflicts with stepper motor pin 9
+const int RX = 63;  // NOTE: Conflicts with motor pin 10
 const int ROOM_NUM = 1120;
-const int ARDUCODE = 566;
+const int ARDUCODE = 15;
 
 int comp_int(const void *a, const void *b) {
   int x = *(int*)a;
@@ -16,7 +15,6 @@ int comp_int(const void *a, const void *b) {
 }
 
 void initComm() {
-  // Serial.begin() should already be called in setup()
   Serial.println("Beginning Connection");
   delay(1000);
   Enes100.begin("Smokey", FIRE, ARDUCODE, ROOM_NUM, TX, RX);
@@ -62,23 +60,33 @@ float getY() {
   return Enes100.getY();
 }
 
+float getTheta() {
+  return Enes100.getTheta();
+}
+
 bool isVisible() {
   return Enes100.isVisible();
 }
 
 String getCoords() {
   if (Enes100.isVisible()) {
-    float x = Enes100.getX();
-    float y = Enes100.getY();
+    float x = getX();
+    float y = getY();
+    float theta = getTheta();
     String result = "Position: (";
     result += String(x);
     result += ", ";
     result += String(y);
+    result += ", ";
+    result += String(theta);
     result += ")";
     return result;
   } else {
     return "OTV is not visible";
   }
 }
-*/
+
+void sendMessage(String message) {
+  Enes100.println(message);
+}
 
