@@ -6,9 +6,10 @@
 // Include all module headers
 #include <math.h>
 #include "drive.h"
-//#include "flame_sensor.h"
+#include "UltrasonicSensor.h"
 #include "comm.h"
 
+// angular velocity of OTV
 const float omega = (3.14159265 / 9000);
 
 void setup() {
@@ -18,27 +19,13 @@ void setup() {
   initMotors();
   // initFlameSensors();
   // initStepperMotor();
-  // initUltrasonicSensor();
+  initUltrasonicSensor();
   initComm();
   Serial.println("=== Initialization Complete ===");
 
   if (getY() > 0) {
     if (getY() < 1) {
-      /*
-      //180 degree turn
-      if (getTheta() < -2.9 || getTheta() > 2.9) {
-        rotateCCW(255);
-        delay(9000);
-        stopAll();
-      }
-      // OTV facing forwards
-      else if (getTheta() < -1.4 || getTheta() > -1.6) {
-        rotateCCW(255);
-        delay(4500);
-        stopAll();
-      }
-      */
-
+      // initial rotation
       while (getTheta() < 0) {
         sendMessage(getCoords());
         rotateCCW(100);
@@ -46,51 +33,39 @@ void setup() {
         stopAll();
         delay(100);
       }
+      
+      //correct oversteer
       stopAll();
       delay(100);
       rotateCW(255);
       delay(ceil(getTheta() / omega) + 350);
       stopAll();
 
+      // move to mission site
       moveForward(255);
       delay(6000);
       stopAll();
       delay(500);
+
+      // identify topography      
       identifyTopography();
+
+      //rotate in center
+        rotateCW(255);
+        delay(5000);            //Test this
+        stopAll();
+
+        //move to first row
+        while (getX() < 1) {
+          moveForward(255);
+          delay(250);
+        } 
     }
   }
 
-  // rotateCCW(255);
-  // delay(2500); // rotate 90 degrees timing
-  // stopAll();
-  // delay(1250);
-  // moveForward(255);
-  // delay(10000);
-  // stopAll();
-  // delay(1250);
+  readDistance();
 }
 
 void loop() {
-  // Your navigation logic here
-  // Example: Check for flame, move, detect topography, etc.
-  // Example usage:
-  /*
-  // Check flame sensors
-  int flameValues[4];
-  readAllFlameSensors(flameValues);
   
-  // Move forward
-  moveForward(speedVal);
-  delay(1000);
-  stopAll();
-  
-  // Read distance
-  float dist = medianDistance(5);
-  Serial.print("Distance: ");
-  Serial.println(dist);
-  
-  // Identify topography
-  identifyTopography();
-  */
 }
-

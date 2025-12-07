@@ -13,7 +13,7 @@ float readDistance() {
   delayMicroseconds(10);
   digitalWrite(ULTRASONIC_TRIG, LOW);
 
-  long duration = pulseIn(ULTRASONIC_ECHO, HIGH, 25000L); // timeout 25 ms (~4.3 m)
+  long duration = pulseIn(ULTRASONIC_ECHO, HIGH, 35000L); // timeout 25 ms (~4.3 m)
 
   // If no pulse detected within 25 ms, return -1 instead of NaN
   if (duration == 0) return -1.0;
@@ -42,4 +42,3 @@ float medianDistance(int samples) {
   }
   return buf[n / 2]; // median
 }
-
