@@ -62,10 +62,10 @@ void setup() {
         } 
     }
   }
-
-  readDistance();
 }
 
 void loop() {
-  
+  float distance = readDistance();
+  Serial.println("Distance: " + String(distance));
+  delay(500);
 }
