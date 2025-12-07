@@ -44,11 +44,11 @@ void identifyTopography() {
     Serial.println("Identified Face: A");
     Enes100.mission(TOPOGRAPHY, TOP_A);
   }
-  else if(roundedMean == TOPO_B) {
+  else if (roundedMean == TOPO_B) {
     Serial.println("Identified Face: B");
     Enes100.mission(TOPOGRAPHY, TOP_B); 
   }
-  else if(roundedMean == TOPO_C) {
+  else if (roundedMean == TOPO_C) {
     Serial.println("Identified Face: C");
     Enes100.mission(TOPOGRAPHY, TOP_C);
   }

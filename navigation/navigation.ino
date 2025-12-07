@@ -52,43 +52,44 @@ void setup() {
 
       //rotate in center
       rotateCW(255);
-        delay(5000);            //Test this
-        stopAll();
+      delay(5000);            //Test this
+      stopAll();
 
-        //Move forward
-        moveForward(255);
-          delay(250);
+      //Move forward
+      moveForward(255);
+      delay(250);
 
-          
       if(readDistance() < 15) {
         stopAll();
         delay(250);
       }
   
-  while (getY() < 1.5) {
-    moveLeft(255);
-    delay(250);
-  }
-  stopAll();
-  
-    if(readDistance() < 15) {
-      while (getY() > 0.5) {
-        moveRight(255);
+      while (getY() < 1.5) {
+        moveLeft(255);
         delay(250);
       }
       stopAll();
-    else{
-      moveForward(255)
-      delay(2000);
-      stopAll();
-    }
-        } 
-    }
-  }
-   
-    
-  }
   
+      if(readDistance() < 15) {
+        while (getY() > 0.5) {
+          moveRight(255);
+          delay(250);
+        }
+        stopAll();
+      } 
+      else {
+        moveForward(255);
+        delay(2000);
+        stopAll();
+      }
+    }
+  }
+
+  // section to test code while OTV is not on field
+  /*
+  * Insert test code here
+  * bla bla bla ....
+  */
 }
 
 void loop() {
