@@ -3,8 +3,8 @@
 
 // Model classification buckets
 #define TOPO_A 0
-#define TOPO_C 1
-#define TOPO_B 3
+#define TOPO_B 1
+#define TOPO_C 2
 
 #include <Arduino.h>
 // Note: Enes100.h is included in comm.cpp, not here, to avoid multiple definition errors

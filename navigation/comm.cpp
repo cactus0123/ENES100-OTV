@@ -31,7 +31,7 @@ void identifyTopography() {
   int ids[10];
 
   for(int i = 0; i < 10; i++) {
-    ids[i] = Enes100.MLGetPrediction(1);
+    ids[i] = Enes100.MLGetPrediction(2);
   }
   qsort(ids, 10, sizeof(int), comp_int);
   
