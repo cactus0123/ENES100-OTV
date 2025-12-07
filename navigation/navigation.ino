@@ -51,21 +51,46 @@ void setup() {
       identifyTopography();
 
       //rotate in center
-        rotateCW(255);
+      rotateCW(255);
         delay(5000);            //Test this
         stopAll();
 
-        //move to first row
-        while (getX() < 1) {
-          moveForward(255);
+        //Move forward
+        moveForward(255);
           delay(250);
+
+          
+      if(readDistance() < 15) {
+        stopAll();
+        delay(250);
+      }
+  
+  while (getY() < 1.5) {
+    moveLeft(255);
+    delay(250);
+  }
+  stopAll();
+  
+    if(readDistance() < 15) {
+      while (getY() > 0.5) {
+        moveRight(255);
+        delay(250);
+      }
+      stopAll();
+    else{
+      moveForward(255)
+      delay(2000);
+      stopAll();
+    }
         } 
     }
   }
+   
+    
+  }
+  
 }
 
 void loop() {
-  float distance = readDistance();
-  Serial.println("Distance: " + String(distance));
-  delay(500);
+  
 }
