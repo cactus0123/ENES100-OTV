@@ -1,5 +1,6 @@
 #include "comm.h"
 #include <stdlib.h>
+#include <math.h>
 #include <Enes100.h>
 
 // Configuration
@@ -29,21 +30,25 @@ bool isConnected() {
 
 void identifyTopography() {
   int ids[10];
+  int sum = 0;
 
   for(int i = 0; i < 10; i++) {
     ids[i] = Enes100.MLGetPrediction(2);
+    sum += ids[i];
   }
-  qsort(ids, 10, sizeof(int), comp_int);
   
-  if (ids[4] == TOPO_A) {
+  float mean = sum / 10.0;
+  int roundedMean = (int)round(mean);
+  
+  if (roundedMean == TOPO_A) {
     Serial.println("Identified Face: A");
     Enes100.mission(TOPOGRAPHY, TOP_A);
   }
-  else if(ids[4] == TOPO_B) {
+  else if(roundedMean == TOPO_B) {
     Serial.println("Identified Face: B");
     Enes100.mission(TOPOGRAPHY, TOP_B); 
   }
-  else if(ids[4] == TOPO_C) {
+  else if(roundedMean == TOPO_C) {
     Serial.println("Identified Face: C");
     Enes100.mission(TOPOGRAPHY, TOP_C);
   }

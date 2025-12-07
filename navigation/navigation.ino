@@ -4,9 +4,12 @@
  */
 
 // Include all module headers
+#include <math.h>
 #include "drive.h"
 //#include "flame_sensor.h"
 #include "comm.h"
+
+const float omega = (3.14159265 / 9000);
 
 void setup() {
   Serial.begin(9600);
@@ -21,6 +24,7 @@ void setup() {
 
   if (getY() > 0) {
     if (getY() < 1) {
+      /*
       //180 degree turn
       if (getTheta() < -2.9 || getTheta() > 2.9) {
         rotateCCW(255);
@@ -33,14 +37,29 @@ void setup() {
         delay(4500);
         stopAll();
       }
+      */
 
-      // moveForward(255);
-      // delay(5000);
-      // stopAll();
+      while (getTheta() < 0) {
+        sendMessage(getCoords());
+        rotateCCW(100);
+        delay(500);
+        stopAll();
+        delay(100);
+      }
+      stopAll();
+      delay(100);
+      rotateCW(255);
+      delay(ceil(getTheta() / omega) + 350);
+      stopAll();
+
+      moveForward(255);
+      delay(6000);
+      stopAll();
+      delay(500);
+      identifyTopography();
     }
   }
 
-  identifyTopography();
   // rotateCCW(255);
   // delay(2500); // rotate 90 degrees timing
   // stopAll();
