@@ -38,14 +38,14 @@ void moveBackward(int spd) {
   for (int i = 0; i < 4; i++) motorMove(i, false, spd);
 }
 
-void moveRight(int spd) {
+void moveLeft(int spd) {
   motorMove(0, false, spd);  // backward
   motorMove(1, true, spd);   // forward
   motorMove(2, false, spd);  // forward
   motorMove(3, true, spd);   // backward
 }
 
-void moveLeft(int spd) {
+void moveRight(int spd) {
   motorMove(0, true, spd);   // forward
   motorMove(1, false, spd);  // backward
   motorMove(2, true, spd);   // backward

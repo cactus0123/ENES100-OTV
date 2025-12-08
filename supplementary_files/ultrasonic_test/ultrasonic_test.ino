@@ -8,7 +8,7 @@ const int ECHO = 9;
 const int TRIG = 10;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
   pinMode(TRIG, OUTPUT);
   pinMode(ECHO, INPUT);
 }

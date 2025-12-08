@@ -90,8 +90,12 @@ void loop() {
   stopAll(); delay(2000);
   */
 
-  rotateCW(255);
-  delay(2700);
+  rotateCCW(255);
+  delay(2500); // rotate 90 degrees timing
+  stopAll();
+  delay(1250);
+  moveForward(255);
+  delay(10000);
   stopAll();
   delay(1250);
   /*

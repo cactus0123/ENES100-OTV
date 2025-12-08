@@ -1,5 +1,4 @@
 #include <Enes100.h>
-#include <stdlib.h>
 
 // Model's corresponsing classification buckets
 #define A 0
@@ -11,14 +10,16 @@
 ** Uno can use whatever
 const int TX = 12;
 const int RX = 13;
+
+for mega as of now
+const int TX = 15;
+const int RX = 14;
 */
 
-const int TX = 9;
-const int RX = 10;
+const int TX = 62;
+const int RX = 63;
 const int ROOM_NUM = 1120;
-const int ARDUCODE = 566;
-
-char coordinates[100] = {0};
+const int ARDUCODE = 977;
 
 void setup() {
   Serial.begin(9600);
@@ -28,6 +29,21 @@ void setup() {
   delay(1000);
   Serial.println(Enes100.isConnected() ? "connected" : "not connected");
   Enes100.println("Hello World, Team Smokey is connected!");
+}
+
+String getCoords() {
+  if (Enes100.isVisible()) {
+    float x = Enes100.getX();
+    float y = Enes100.getY();
+    String result = "Position: (";
+    result += String(x);
+    result += ", ";
+    result += String(y);
+    result += ")";
+    return result;
+  } else {
+    return "OTV is not visible";
+  }
 }
 
 int comp_int(const void *a, const void *b) {
@@ -74,5 +90,6 @@ void loop() {
   // Serial.println(")");
 
   //Serial.println(Enes100.MLGetPrediction(1));
+  //Serial.println(getCoords());
   identify_topography();
 }

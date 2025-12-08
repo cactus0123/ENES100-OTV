@@ -3,8 +3,8 @@
 
 // Ultrasonic sensor pin definitions
 // NOTE: Adjust pins to avoid conflicts with other modules
-#define ULTRASONIC_TRIG A13   // Changed from 10 to avoid conflict
-#define ULTRASONIC_ECHO A12   // Changed from 9 to avoid conflict
+#define ULTRASONIC_TRIG 42   // Brown
+#define ULTRASONIC_ECHO 40   // Changed from 9 to avoid conflict
 
 // Ultrasonic sensor functions
 void initUltrasonicSensor();
