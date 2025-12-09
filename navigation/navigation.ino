@@ -8,6 +8,7 @@
 #include "drive.h"
 #include "UltrasonicSensor.h"
 #include "comm.h"
+#include "stepper.h"
 
 #define PI 3.14159265
 
@@ -20,7 +21,7 @@ void setup() {
   Serial.println("=== Initializing Robot Systems ===");
   initMotors();
   // initFlameSensors();
-  // initStepperMotor();
+  initStepperMotor();
   initUltrasonicSensor();
   initComm();
   Serial.println("=== Initialization Complete ===");
@@ -44,7 +45,7 @@ void setup() {
       stopAll();
 
       // move to mission site
-      moveForward(255);
+      moveForward(255, false);
       delay(6000);
       stopAll();
       delay(500);
@@ -52,14 +53,14 @@ void setup() {
       // identify topography      
       identifyTopography();
 
-      moveForward(255);
+      moveForward(255, false);
       delay(5000);
       stopAll();
       delay(2000);
 
       while (getY() > 1) {
-        moveBackward(255);
-        delay(5000);
+        moveBackward(255, false);
+        delay(250);
       }
       stopAll();
       delay(1000);
@@ -74,7 +75,7 @@ void setup() {
 
       stopAll();
       delay(100);
-      rotateCW(255);
+      rotateCW(255, false);
       delay(ceil(abs(getTheta() - (PI / 2)) / omega) + 350);
       stopAll();
     }
@@ -82,7 +83,7 @@ void setup() {
 
       // initial rotation
       while (getTheta() > 0) {
-        rotateCCW(100);
+        rotateCCW(100, false);
         delay(500);
         stopAll();
         delay(100);
@@ -91,12 +92,12 @@ void setup() {
       //correct oversteer
       stopAll();
       delay(100);
-      rotateCW(255);
+      rotateCW(255, false);
       delay(ceil((PI + getTheta()) / omega) + 350);
       stopAll();
 
       // move to mission site
-      moveForward(255);
+      moveForward(255, false);
       delay(6000);
       stopAll();
       delay(500);
@@ -106,7 +107,7 @@ void setup() {
 
       //rotate in center
       while (getTheta() < (-PI/2) || getTheta() > (PI/2)) {
-        rotateCCW(255);
+        rotateCCW(255, false);
         delay(500);
         stopAll();
         delay(100);
@@ -114,7 +115,7 @@ void setup() {
 
       stopAll();
       delay(100);
-      rotateCCW(255);
+      rotateCCW(255, false);
       delay(ceil(abs(getTheta() + (PI / 2)) / omega) + 350);
       stopAll();
 
@@ -124,7 +125,7 @@ void setup() {
 
     //Move forward to first column
     while (getX() < 0.8) {
-      moveForward(255);
+      moveForward(255, true);
       delay(250);
     }
     stopAll();
@@ -135,7 +136,7 @@ void setup() {
     if(readDistance() < 25) {
       // move left if middle row is blocked
       while (getY() < 1.5) {
-        moveLeft(255);
+        moveLeft(255, true);
         delay(250);
       }
       stopAll(); 
@@ -146,32 +147,32 @@ void setup() {
       // move all the way right if left row is blocked
       if(readDistance() < 25) {
         while (getY() > 0.3) {
-          moveRight(255);
+          moveRight(255, true);
           delay(250);
         }
         stopAll();
 
         while (getX() < 1.8) {
-          moveForward(255);
+          moveForward(255, true);
           delay(250);
         }
         stopAll();
 
         while (getY() < 1) {
-          moveLeft(255);
+          moveLeft(255, true);
           delay(250);
         }
         stopAll();
       }
       else {
         while (getX() < 1.8) {
-          moveForward(255);
+          moveForward(255, true);
           delay(250);
         }
         stopAll();
 
         while (getY() > 1.1) {
-          moveRight(255);
+          moveRight(255, true);
           delay(250);
         }
         stopAll();
@@ -181,7 +182,7 @@ void setup() {
     // if middle row is not blocked, continue to row 2
     else {
       while (getX() < 1.8) {
-        moveForward(255);
+        moveForward(255, true);
         delay(250);
       }
       stopAll();
@@ -196,7 +197,7 @@ void setup() {
     if(readDistance() < 25) {
       // move left if middle row is blocked
       while (getY() < 1.5) {
-        moveLeft(255);
+        moveLeft(255, true);
         delay(250);
       }
       stopAll(); 
@@ -207,19 +208,19 @@ void setup() {
       if(readDistance() < 25) {
         // move all the way right if left row is blocked
         while (getY() > 0.3) {
-          moveRight(255);
+          moveRight(255, true);
           delay(250);
         }
         stopAll();
 
         while (getX() < 3) {
-          moveForward(255);
+          moveForward(255, true);
           delay(250);
         }
         stopAll();
 
         while (getY() < 1.5) {
-          moveLeft(255);
+          moveLeft(255, true);
           delay(250);
         }
         stopAll();
@@ -227,7 +228,7 @@ void setup() {
       }
       else {
         while (getX() < 3) {
-          moveForward(255);
+          moveForward(255, true);
           delay(250);
         }
         stopAll();
@@ -237,13 +238,13 @@ void setup() {
     // if middle row is not blocked, continue to finish
     else {
       while (getX() < 3) {
-        moveForward(255);
+        moveForward(255, true);
         delay(250);
       }
       stopAll();
 
       while (getY() < 1.5) {
-        moveLeft(255);
+        moveLeft(255, true);
         delay(250);
       }
       stopAll();
@@ -252,7 +253,7 @@ void setup() {
     }
 
     while (getX() < 3.8) {
-      moveForward(255);
+      moveForward(255, true);
       delay(250);
     }
     stopAll();
@@ -265,6 +266,8 @@ void setup() {
   * Insert test code here
   * bla bla bla ....
   */
+  rotateStepper(true, 1, 5);
+  //identifyTopography();
 }
 
 void loop() {
