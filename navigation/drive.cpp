@@ -30,39 +30,39 @@ void stopAll() {
   }
 }
 
-void moveForward(int spd) {
-  for (int i = 0; i < 4; i++) motorMove(i, true, spd);
+void moveForward(int spd, bool reverse) {
+  for (int i = 0; i < 4; i++) motorMove(i, !reverse, spd);
 }
 
-void moveBackward(int spd) {
-  for (int i = 0; i < 4; i++) motorMove(i, false, spd);
+void moveBackward(int spd, bool reverse) {
+  for (int i = 0; i < 4; i++) motorMove(i, reverse, spd);
 }
 
-void moveLeft(int spd) {
-  motorMove(0, false, spd);  // backward
-  motorMove(1, true, spd);   // forward
-  motorMove(2, false, spd);  // forward
-  motorMove(3, true, spd);   // backward
+void moveLeft(int spd, bool reverse) {
+  motorMove(0, reverse, spd);
+  motorMove(1, !reverse, spd);
+  motorMove(2, reverse, spd);
+  motorMove(3, !reverse, spd);
 }
 
-void moveRight(int spd) {
-  motorMove(0, true, spd);   // forward
-  motorMove(1, false, spd);  // backward
-  motorMove(2, true, spd);   // backward
-  motorMove(3, false, spd);  // forward
+void moveRight(int spd, bool reverse) {
+  motorMove(0, !reverse, spd);
+  motorMove(1, reverse, spd);
+  motorMove(2, !reverse, spd);
+  motorMove(3, reverse, spd);
 }
 
-void rotateCW(int spd) {
-  motorMove(0, true, spd);   // forward
-  motorMove(1, false, spd);  // backward
-  motorMove(2, false, spd);  // forward
-  motorMove(3, true, spd);   // backward
+void rotateCW(int spd, bool reverse) {
+  motorMove(0, !reverse, spd);
+  motorMove(1, reverse, spd);
+  motorMove(2, reverse, spd);
+  motorMove(3, !reverse, spd);
 }
 
-void rotateCCW(int spd) {
-  motorMove(0, false, spd);  // backward
-  motorMove(1, true, spd);   // forward
-  motorMove(2, true, spd);   // backward
-  motorMove(3, false, spd);  // forward
+void rotateCCW(int spd, bool reverse) {
+  motorMove(0, reverse, spd);
+  motorMove(1, !reverse, spd);
+  motorMove(2, !reverse, spd);
+  motorMove(3, reverse, spd);
 }
 

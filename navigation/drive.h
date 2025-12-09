@@ -12,12 +12,12 @@ struct Motor {
 void initMotors();
 void motorMove(int m, bool forward, int spd);
 void stopAll();
-void moveForward(int spd);
-void moveBackward(int spd);
-void moveRight(int spd);
-void moveLeft(int spd);
-void rotateCW(int spd);
-void rotateCCW(int spd);
+void moveForward(int spd, bool reverse = false);
+void moveBackward(int spd, bool reverse = false);
+void moveRight(int spd, bool reverse = false);
+void moveLeft(int spd, bool reverse = false);
+void rotateCW(int spd, bool reverse = false);
+void rotateCCW(int spd, bool reverse = false);
 
 // External motor array (defined in .cpp)
 extern Motor motors[4];

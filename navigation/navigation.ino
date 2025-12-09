@@ -52,9 +52,21 @@ void setup() {
       // identify topography      
       identifyTopography();
 
+      moveForward(255);
+      delay(5000);
+      stopAll();
+      delay(2000);
+
+      while (getY() > 1) {
+        moveBackward(255);
+        delay(5000);
+      }
+      stopAll();
+      delay(1000);
+
       //rotate in center
-      while (getTheta() > (-PI/2)) {
-        rotateCW(255);
+      while (getTheta() < (PI/2)) {
+        rotateCCW(255);
         delay(500);
         stopAll();
         delay(100);
@@ -62,8 +74,8 @@ void setup() {
 
       stopAll();
       delay(100);
-      rotateCCW(255);
-      delay(ceil(abs(getTheta() + (PI / 2)) / omega) + 350);
+      rotateCW(255);
+      delay(ceil(abs(getTheta() - (PI / 2)) / omega) + 350);
       stopAll();
     }
     else {
