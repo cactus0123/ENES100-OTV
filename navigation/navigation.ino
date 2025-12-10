@@ -20,10 +20,13 @@ void setup() {
   delay(100);  // Give Serial time to initialize
   Serial.println("=== Initializing Robot Systems ===");
   initMotors();
-  // initFlameSensors();
-  initStepperMotor();
-  initUltrasonicSensor();
   initComm();
+  initUltrasonicSensor();
+
+  initStepperMotor();
+  rotateStepper(true, 1, 7);
+
+  // initFlameSensors();
   Serial.println("=== Initialization Complete ===");
 
   if (getY() > 0) {
@@ -58,10 +61,13 @@ void setup() {
       stopAll();
       delay(2000);
 
-      while (getY() > 1) {
-        moveBackward(255, false);
-        delay(250);
-      }
+      rotateStepper(false, 1, 7);
+      delay(30000);
+      rotateStepper(true, 1, 7);
+
+      
+      moveBackward(255, false);
+      delay(3000);
       stopAll();
       delay(1000);
 
@@ -78,6 +84,13 @@ void setup() {
       rotateCW(255, false);
       delay(ceil(abs(getTheta() - (PI / 2)) / omega) + 350);
       stopAll();
+
+      while (getY() < 1) {
+        moveLeft(255, true);
+        delay(250);
+      }
+      stopAll();
+      delay(1000);
     }
     else {
 
@@ -266,8 +279,8 @@ void setup() {
   * Insert test code here
   * bla bla bla ....
   */
-  rotateStepper(true, 1, 5);
-  //identifyTopography();
+  
+  identifyTopography();
 }
 
 void loop() {
