@@ -54,7 +54,7 @@ void setup() {
       delay(500);
 
       // identify topography      
-      identifyTopography();
+      // identifyTopography();
 
       moveForward(255, false);
       delay(5000);
@@ -116,11 +116,27 @@ void setup() {
       delay(500);
 
       // identify topography      
-      identifyTopography();
+      // identifyTopography();
+
+      moveForward(255, false);
+      delay(5000);
+      stopAll();
+      delay(2000);
+
+      rotateStepper(false, 1, 7);
+      delay(30000);
+      rotateStepper(true, 1, 7);
+
+      
+      moveBackward(255, false);
+      delay(3000);
+      stopAll();
+      delay(1000);
+
 
       //rotate in center
-      while (getTheta() < (-PI/2) || getTheta() > (PI/2)) {
-        rotateCCW(255, false);
+      while (getTheta() > (PI/2)) {
+        rotateCW(255);
         delay(500);
         stopAll();
         delay(100);
@@ -129,9 +145,15 @@ void setup() {
       stopAll();
       delay(100);
       rotateCCW(255, false);
-      delay(ceil(abs(getTheta() + (PI / 2)) / omega) + 350);
+      delay(ceil(abs(getTheta() - (PI / 2)) / omega) + 350);
       stopAll();
 
+      while (getY() < 1) {
+        moveLeft(255, false);
+        delay(250);
+      }
+      stopAll();
+      delay(1000);
     }
     
 
@@ -274,13 +296,12 @@ void setup() {
 
   }
 
+
   // section to test code while OTV is not on field
   /*
   * Insert test code here
   * bla bla bla ....
   */
-  
-  identifyTopography();
 }
 
 void loop() {

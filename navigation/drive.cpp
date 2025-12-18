@@ -38,30 +38,30 @@ void moveBackward(int spd, bool reverse) {
   for (int i = 0; i < 4; i++) motorMove(i, reverse, spd);
 }
 
-void moveLeft(int spd, bool reverse) {
-  motorMove(0, reverse, spd);
-  motorMove(1, !reverse, spd);
-  motorMove(2, reverse, spd);
-  motorMove(3, !reverse, spd);
-}
-
 void moveRight(int spd, bool reverse) {
   motorMove(0, !reverse, spd);
   motorMove(1, reverse, spd);
-  motorMove(2, !reverse, spd);
-  motorMove(3, reverse, spd);
-}
-
-void rotateCW(int spd, bool reverse) {
-  motorMove(0, !reverse, spd);
-  motorMove(1, reverse, spd);
   motorMove(2, reverse, spd);
   motorMove(3, !reverse, spd);
+}
+
+void moveLeft(int spd, bool reverse) {
+  motorMove(0, reverse, spd);
+  motorMove(1, !reverse, spd);
+  motorMove(2, !reverse, spd);
+  motorMove(3, reverse, spd);
 }
 
 void rotateCCW(int spd, bool reverse) {
   motorMove(0, reverse, spd);
   motorMove(1, !reverse, spd);
+  motorMove(2, reverse, spd);
+  motorMove(3, !reverse, spd);
+}
+
+void rotateCW(int spd, bool reverse) {
+  motorMove(0, !reverse, spd);
+  motorMove(1, reverse, spd);
   motorMove(2, !reverse, spd);
   motorMove(3, reverse, spd);
 }

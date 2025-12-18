@@ -7,7 +7,7 @@
 const int TX = 62;   // NOTE: Conflicts with stepper motor pin 9
 const int RX = 63;  // NOTE: Conflicts with motor pin 10
 const int ROOM_NUM = 1120;
-const int ARDUCODE = 15;
+const int ARDUCODE = 24;
 
 int comp_int(const void *a, const void *b) {
   int x = *(int*)a;
